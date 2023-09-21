@@ -7,42 +7,41 @@ class Item{
 }
 
 
-const Buho = new Item("Buho ", 80, "buho.png");
-const Manija = new Item("Manija", 180, "manija.png");
-const Poción = new Item("Poción", 90, "pocion.png");
+const buho = new Item("Buho", 1800, "./buho.png");
+const manija = new Item("Manija", 300, "./manija.png");
+const pocion = new Item("Poción", 500, "./pocion.png");
 
  const inventario = [];
 
 
-let oro = 1000;
+let oro = 5000;
 
-const elOro = document.querySelector("#Oro span");
+const elOro = document.querySelector("#oro span");
 elOro.innerText = oro;
-const elInventario = document.getElementsByClassName("Inventario");
+const elInventario = document.getElementById("inventario");
 
-function comprar(item){
- if (oro - item.precio >= 0) {
-    inventario.push(item);
-    oro -= item.precio;
+function comprar(gameItem){
+ if (oro - gameItem.precio >= 0) {
+    inventario.push(gameItem);
+    oro -= gameItem.precio;
     actualizarHTML();
  } else {
-    alert(`No te da la billetera pa comprar ${item.nombre}.`);
+    alert(`No te da la billetera pa comprar ${gameItem.nombre}.`);
  }
 }
 
-const vender = () => { 
-   return ""
-}
-
-function vender(nombreItem){
+function vender(nombreItem) {
    
-   const itemEncontrado = inventario.find((item) => item.nombre == nombreDelItem);
+   const itemEncontrado = inventario.find(
+      (item) => item.nombre == nombreItem
+      );
 
    if (itemEncontrado) { 
       oro += itemEncontrado.precio;
 
       const indice = inventario.indexOf(itemEncontrado)
       inventario.splice(indice,1);
+      
       actualizarHTML();
    }
     
@@ -50,15 +49,14 @@ function vender(nombreItem){
 
 function actualizarHTML(){
  elInventario.innerHTML = "";
- for (const item of inventario) {
-    const indice = inventario.indexOf(item);
+ for (const gameItem of inventario) {
     const li = 
     `
-    <li onclick="vender('${item.nombre}')">
-    <img src="img/${item.imagen}" alt="${item.imagen}" />
-    </li>
+      <li onclick="vender('${gameItem.nombre}')">
+         <img src="img/${gameItem.imagen}" alt="${gameItem.imagen}" />
+      </li>
     `;
-    inventario.innerHTML += li;
+    elInventario.innerHTML += li;
  } 
 
 
