@@ -1,0 +1,19 @@
+section {
+    border: 2px solid black;
+    padding: 50px;
+}
+
+ul li:hover {
+    font-size: 40px;
+
+}
+
+.onclicks {
+    text-align: center;
+    
+}
+
+.inventario {
+    text-align: center;
+}
+
